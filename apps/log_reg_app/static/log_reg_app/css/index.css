@@ -1,0 +1,25 @@
+
+td{
+    text-align: right;
+    height: 75px;
+}
+
+.col-md-5{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 70px;
+}
+
+input{
+    border-radius: 5px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+}
+
+
+.error{
+    color: red;
+} 
+.col-md-1{
+    display: inline-block;
+}
