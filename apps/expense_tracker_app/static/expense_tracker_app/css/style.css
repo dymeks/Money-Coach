@@ -1,0 +1,10 @@
+.graph {
+	display: inline-block;
+	width:40%;
+}
+
+.goals {
+	display: inline-block;
+	width:40%;
+	vertical-align: top;
+}
