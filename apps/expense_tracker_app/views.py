@@ -10,7 +10,7 @@ from datetime import datetime
 import pandas as pd
 
 # Create your views here.
-def index(request):
+def home(request):
 
 	response = "THis will display the success page/home page after login/registration is successful"
 	df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv")
