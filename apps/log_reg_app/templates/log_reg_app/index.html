@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'log_reg_app/css/index.css' %}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h3>Register</h3>
+            <form action='/register' method='POST'>
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>First Name: </td>
+                        <td><input type="text" name="first_name" id="first_name"></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name: </td>
+                        <td><input type="text" name="last_name" id="last_name"></td>
+                    </tr>
+                    <tr>
+                        <td>Email Address: </td>
+                        <td><input type="text" name="email" id="email"></td>
+                    </tr>
+                    <tr>
+                        <td>Password: </td>
+                        <td><input type="password" name="password" id="password"></td>
+                    </tr>
+                    <tr>
+                        <td>Confirm Password: </td>
+                        <td><input type="password" name="password_conf" id="password_conf"></td>
+                    </tr>
+                    <tr>
+                        <td>Date of Birth:</td>
+                        <td><input type="date" name="bday"></td>
+                    </tr>                                    
+                </table>
+                <input class="submit" type="submit" value="Register">                
+            </form>
+            {% if messages %}
+                {% for message in messages %}      
+                    {% if message.tags == "register error" %}
+                        <p class="error">{{message}}</p>                    
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col-md-5">
+            <h3>Login</h3>
+            <form action='/login' method='POST'>
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>Email Address: </td>
+                        <td><input type="text" name="email" id="email"></td>
+                    </tr>
+                    <tr>
+                        <td>Password: </td>
+                        <td><input type="password" name="password" id="password"></td>
+                    </tr>
+                </table>                
+                <input class="submit" type="submit" value="Login">
+            </form>
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == "login error" %}
+                        <p class="error">{{message}}</p>                    
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</body>
+</html>
