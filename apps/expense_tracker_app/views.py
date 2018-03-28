@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.shortcuts import render, redirect, HttpResponse
-
+from ..log_reg_app.models import User
 import plotly.plotly as py
 from plotly.graph_objs import Scatter, Layout
 import plotly.graph_objs as go
@@ -29,11 +29,32 @@ class UploadFileForm(forms.Form):
 def home(request):
 
 	response = "THis will display the success page/home page after login/registration is successful"
-	df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv")
+	
+	df = pd.read_csv("media/documents/goals/susan/susan_goals.csv")
+
+	context = {
+		'user_name': User.objects.get(id=request.session['user_id']).first_name,
+		'response':response,
+		'goals':df['goal'],
+
+	}
+	return render(request,'expense_tracker_app/index.html',context)
+def pie_chart(request):
+
+	labels = ['Rent','Food','Entertainment','Car']
+	values = [135.90,25.6,100.30,200.74]
+	trace = go.Pie(labels=labels, values=values)
+	py.plot([trace], filename='basic_pie_chart',auto_open=False)
+	pie_chart = tls.get_embed('https://plot.ly/~dymeks/0')
+
+	return render(request,'expense_tracker_app/history.html',{'graph':pie_chart})
+def history(request):
+	df = pd.read_csv("media/documents/2018/03/sample_transaction2.csv")
+	
 	trace_high = go.Scatter(
-		x=df.Date,
-		y=df['AAPL.High'],
-		name = "AAPL High",
+		x=df.date,
+		y=df['price'],
+		name = "Price",
 		line = dict(color = '#17BECF'),
 		opacity = 0.8)
 	data = [trace_high]
@@ -58,36 +79,42 @@ def home(request):
 			type='date'
 		)
 	)
+
 	fig = dict(data=data,layout=layout)
 	py.plot(fig, filename='history_chart',auto_open=False,link=False)
-
-	trace1 = go.Bar(
-		x=['car', 'house', 'trip to Europe'],
-		y=[20.5, 14.0, 23.99],
-		name='amount I have saved'
-	)
-	trace2 = go.Bar(
-		x=['car', 'house', 'trip to Europe'],
-		y=[12.4, 18.2, 29],
-		name='Amount I have left to save'
-	)
-
-	data = [trace1, trace2]
-	layout = go.Layout(
-	    barmode='stack'
-	)
-
-	fig = go.Figure(data=data, layout=layout)
-	py.plot(fig, filename='goals',auto_open=False,link=False)
+	
 	context = {
-		'graph': tls.get_embed('https://plot.ly/~dymeks/29'),
-		'response':response,
-		'goals':tls.get_embed('https://plot.ly/~dymeks/31'),
-
+		'graph': tls.get_embed('https://plot.ly/~dymeks/29')
 	}
-	return render(request,'expense_tracker_app/index.html',context)
 
+	return render(request,'expense_tracker_app/history.html',context)
 
+def graph(request):
+	df = pd.read_csv("media/documents/goals/susan/susan_goals.csv")
+	print "The entire csv file: "+ str(df)
+	for goal in df:
+		print goal
+		# trace1 = go.Bar(
+		# 	x=goal.goal,
+		# 	y=df.current_amount,
+		# 	name='amount I have saved'
+		# )
+
+		# trace2 = go.Bar(
+		# 	x=df.goal,
+		# 	y=df.total_amount,
+		# 	name='Amount I have left to save'
+		# )
+
+	# data = [trace1, trace2]
+	# layout = go.Layout(
+	#     barmode='stack'
+	# )
+
+	# fig = go.Figure(data=data, layout=layout)
+	# py.plot(fig, filename='goals',auto_open=False,link=False)
+
+	# tls.get_embed('https://plot.ly/~dymeks/31')
 def import_sheet(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST,
