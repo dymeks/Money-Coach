@@ -16,7 +16,9 @@ class Transaction(models.Model):
     company = models.CharField(max_length=255)
     category = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=19, decimal_places=2)
+    document = models.ForeignKey(Document, related_name="transactions_of", null=True, blank=True)
+    user = models.ForeignKey(User, related_name="personal_transactions", null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add = True)
 
     def __str__(self):
-        return self.question_text
+        return self.company

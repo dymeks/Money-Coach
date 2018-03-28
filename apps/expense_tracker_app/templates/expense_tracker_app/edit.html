@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>File Display</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'expense_tracker_app/css/docs.css' %}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+      <div class="col-md-2"></div>  
+      <div class="col-md-8">
+          <h3 class="title">Edit Your Transaction:</h3>
+          <form action="/track/modify/{{transaction.id}}" method="POST">
+            {% csrf_token %}
+            <table class="table">
+                <tr>
+                    <th>Date of Purchase</th>
+                    <th>Company</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                </tr>
+                <tr>
+                    <td><input type="date" name="date" placeholder="{{transaction.date_of_purchase}}"></td>
+                    <td><input type="text" name="company" placeholder="{{transaction.company}}"></td>
+                    <td><input type="text" name="category" placeholder="{{transaction.category}}"></td>
+                    <td><input type="number" step="0.01" name="price" placeholder="${{transaction.price}}"></td>
+                </tr>
+            </table>
+          <input type="submit" value="Save Edits">
+          </form>        
+      </div>  
+      <div class="col-md-2"></div>
+    </div>
+</body>
+</html>

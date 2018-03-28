@@ -1,0 +1,12 @@
+.col-md-8{
+    display: inline-block;
+}
+
+.col-md-2{
+    display: inline-block;
+}
+
+.title{
+    text-align: center;
+    margin-top: 80px;
+}
