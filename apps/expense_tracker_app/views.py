@@ -98,7 +98,7 @@ def import_sheet(request):
             
 			request.FILES['file'].save_to_database(
                 model=Transaction,
-                mapdict=['date_of_purchase', 'company', 'price',]
+                mapdict=['date_of_purchase', 'company', 'category', 'price',]
 				)
 			t = Transaction.objects.last().company
 			print t
