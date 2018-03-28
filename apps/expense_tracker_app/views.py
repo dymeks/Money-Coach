@@ -78,6 +78,8 @@ def import_sheet(request):
                 model=Transaction,
                 mapdict=['date_of_purchase', 'company', 'price',]
 				)
+			t = Transaction.objects.last().company
+			print t
 			return HttpResponse("OK")
 
         else:
