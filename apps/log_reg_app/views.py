@@ -14,7 +14,7 @@ def register(request):
     print request.POST['bday']
     if response['status']:
         request.session['user_id'] = response['user'].id
-        return redirect ('/') 
+        return redirect ('/track') 
     else:
         for tag, error in response['errors'].iteritems():
             messages.error(request, error, extra_tags="register")
@@ -25,7 +25,7 @@ def login(request):
 
     if response['status']:
         request.session['user_id'] = response['user'].id
-        return redirect ('/')
+        return redirect ('/track')
     else:
         for tag, error in response['errors'].iteritems():
             messages.error(request, error, extra_tags='login')
