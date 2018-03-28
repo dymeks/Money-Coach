@@ -43,9 +43,30 @@ def home(request):
 		)
 	)
 	fig = dict(data=data,layout=layout)
-	py.plot(fig, filename='history_chart',auto_open=False)
+	py.plot(fig, filename='history_chart',auto_open=False,link=False)
+
+	trace1 = go.Bar(
+		x=['car', 'house', 'trip to Europe'],
+		y=[20.5, 14.0, 23.99],
+		name='amount I have saved'
+	)
+	trace2 = go.Bar(
+		x=['car', 'house', 'trip to Europe'],
+		y=[12.4, 18.2, 29],
+		name='Amount I have left to save'
+	)
+
+	data = [trace1, trace2]
+	layout = go.Layout(
+	    barmode='stack'
+	)
+
+	fig = go.Figure(data=data, layout=layout)
+	py.plot(fig, filename='goals',auto_open=False,link=False)
 	context = {
 		'graph': tls.get_embed('https://plot.ly/~dymeks/29'),
-		'response':response
-		}
+		'response':response,
+		'goals':tls.get_embed('https://plot.ly/~dymeks/31'),
+
+	}
 	return render(request,'expense_tracker_app/index.html',context)

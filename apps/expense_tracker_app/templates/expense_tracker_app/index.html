@@ -4,22 +4,49 @@
 	<meta charset="utf-8">
 	<title>Success!</title>
 	{% load static %}
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<!-- <script type="text/javascript" src='http://code.jquery.com/jquery-1.10.2.min.js'></script> -->
 	<link rel="stylesheet" href="{% static 'expense_tracker_app/css/style.css' %}" media="screen" title="no title"  charset="utf-8">
 </head>
 <body>
-	<h1>Welcome, request.session.user_name</h1>
-	<div>
-		{{response}}
+	<div class="container-fluid background">
+		<div class="header">
+			<h1>Welcome, {{request.session.user_name}}</h1>
+			<div>
+				{{response}}
+			</div>
+			<img src="{% static 'expense_tracker_app/images/coach.jpg' %}">
+		</div>
+		
+		
+		<div class="graph">
+			<h2>Your Financial History:</h2>
+			{{graph | safe}}
+		</div>
+		<div class="goals">
+			<h2>Your Financial Goals:</h2>
+			{{goals | safe}}
+			<!-- {% for goal in goals %}
+				<div class="goal">
+					{% for number in goal.total_amount %}
+						{% if number <= goal.current_amount %}
+							<div class="green">
+						{% else %}
+							<div>
+						{% endif %}		
+						</div>
+					{% endfor %}	
+				</div>
+			{% endfor %}	 -->
+		</div>
 	</div>
 	
-	<div class="graph">
-		<h2>Your Financial History:</h2>
-		{{graph | safe}}
-	</div>
-	<div class="goals">
-		<h2>Your Financial Goals:</h2>
-		{{goals}}
-	</div>
 </body>
 </html>
