@@ -8,7 +8,8 @@
 	<link rel="stylesheet" href="{% static 'expense_tracker_app/css/style.css' %}" media="screen" title="no title"  charset="utf-8">
 </head>
 <body>
-	<h1>Welcome, request.session.user_name</h1>
+	<h1>Welcome, {{request.session.user_id}}</h1>
+	<a href="/track/import">Import Your Transaction History Here!</a>
 	<div>
 		{{response}}
 	</div>

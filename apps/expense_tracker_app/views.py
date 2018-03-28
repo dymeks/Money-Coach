@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.shortcuts import render, redirect, HttpResponse
+
 import plotly.plotly as py
 from plotly.graph_objs import Scatter, Layout
 import plotly.graph_objs as go
@@ -8,6 +9,21 @@ import plotly
 import plotly.tools as tls
 from datetime import datetime
 import pandas as pd
+
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+import xlrd
+import pandas as pd
+from pandas import ExcelFile
+from pandas import ExcelWriter
+
+from django import forms
+import django_excel as excel
+from .models import Transaction, Document
+from ..log_reg_app.models import User
+
+class UploadFileForm(forms.Form):
+    file = forms.FileField()
 
 # Create your views here.
 def home(request):
@@ -49,3 +65,35 @@ def home(request):
 		'response':response
 		}
 	return render(request,'expense_tracker_app/index.html',context)
+
+def import_sheet(request):
+    if request.method == "POST":
+        form = UploadFileForm(request.POST,
+                              request.FILES)
+        if form.is_valid():
+			user = User.objects.get(id=request.session['user_id'])
+			instance = Document.objects.create(document=request.FILES['file'], user=User.objects.get(id=request.session['user_id']))			
+            
+			request.FILES['file'].save_to_database(
+                model=Transaction,
+                mapdict=['date_of_purchase', 'company', 'price',]
+				)
+			return HttpResponse("OK")
+
+        else:
+            return HttpResponseBadRequest()
+    else:
+        form = UploadFileForm()
+        return render(
+            request,
+            'expense_tracker_app/upload_form.html',
+            {'form': form
+			})
+		
+def display_docs(request):
+	documents = Document.objects.all()
+	return render(
+		request,
+		'expense_tracker_app/docs.html',
+		{'documents': documents
+		})
