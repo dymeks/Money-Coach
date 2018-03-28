@@ -121,15 +121,18 @@ def import_sheet(request):
                               request.FILES)
         if form.is_valid():
 			user = User.objects.get(id=request.session['user_id'])
-			instance = Document.objects.create(document=request.FILES['file'], user=User.objects.get(id=request.session['user_id']))			
-            
+			instance = Document.objects.create(document=request.FILES['file'], user=User.objects.get(id=request.session['user_id']))
+			request.session['doc_id'] = instance.id
 			request.FILES['file'].save_to_database(
                 model=Transaction,
                 mapdict=['date_of_purchase', 'company', 'category', 'price',]
 				)
-			t = Transaction.objects.last().company
-			print t
-			return HttpResponse("OK")
+			added_t = Transaction.objects.filter(document__isnull=True)
+			for t in added_t:
+				t.document = instance
+				t.user = user
+				t.save()			
+			return redirect('/track/display')
 
         else:
             return HttpResponseBadRequest()
@@ -142,9 +145,29 @@ def import_sheet(request):
 			})
 		
 def display_docs(request):
-	documents = Document.objects.all()
+	user = User.objects.get(id=request.session['user_id'])
+	transactions = Document.objects.get(id=request.session['doc_id']).transactions_of.all()
+	context = {
+		'user': user,
+		'transactions': transactions
+	}
 	return render(
 		request,
 		'expense_tracker_app/docs.html',
-		{'documents': documents
-		})
+		context)
+
+def edit(request, t_id):
+	transaction = Transaction.objects.get(id=t_id)
+	context = {
+		'transaction': transaction,
+	}
+	return render(request, 'expense_tracker_app/edit.html', context)
+
+def modify(request, t_id):
+	t = Transaction.objects.get(id=t_id)
+	t.date_of_purchase = request.POST['date']
+	t.company = request.POST['company']
+	t.category = request.POST['category']
+	t.price = request.POST['price']
+	t.save()
+	return redirect('/track/display')

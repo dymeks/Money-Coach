@@ -1,25 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <title>File Display</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'expense_tracker_app/css/docs.css' %}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </head>
 <body>
-    <div class="container">       
-          <p>Uploaded files:</p>
-          <ul>
-            {% for obj in documents %}
-              <li>
-                <a href="{{ obj.document.url }}">{{ obj.document.name }}</a>
-                <small>(Uploaded at: {{ obj.uploaded_at }})</small>
-                <p>The size is {{obj.document.size}} bytes</p>
-                <p>{{obj.document.path}}</p>
-                <p>Uploaded By: {{obj.user.first_name}}</p>
-              </li>
+    <div class="container">
+      <div class="col-md-2"></div>  
+      <div class="col-md-8">
+          <h3 class="title">Uploaded transactions:</h3>
+          <table class="table">
+            <tr>
+              <th>Date of Purchase</th>
+              <th>Company</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Edit Transaction</th>
+            </tr>
+            {% for t in transactions %}
+              <tr>
+                <td>{{t.date_of_purchase}}</td>
+                <td>{{t.company}}</td>
+                <td>{{t.category}}</td>
+                <td>${{t.price}}</td>
+                <td><a href="/track/edit/{{t.id}}">Edit</a></td>
+              </tr>
             {% endfor %}
-          </ul>
+          </table>
+          <h4>Does Everything Look OK? Now, let's import your transactions to your financial history!</h4>
+      </div>  
+      <div class="col-md-2"></div>
     </div>
 </body>
 </html>
