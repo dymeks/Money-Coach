@@ -1,13 +1,13 @@
 img{
     display: inline-block;
-    height: 66px;
+    height: 82px;
     vertical-align: top;
-    margin-top: 10px;
+    margin-top: 3px;
 }
 
 h1{
     display: inline-block;
-    font-size: 51px;
+    font-size: 69px;
     text-align: center;
     font-family: 'Black Ops One', cursive;
 }
@@ -15,13 +15,58 @@ h1{
 .col-sm-12{
     text-align: center;
     margin-top: 240px;
+    position: absolute;
+    margin-top: -536px;
 }
 .col-sm-8{
     text-align: center;
-    margin-left: 148px;
+    margin-left: 193px;
+    position: absolute;
+    margin-top: -384px;
 }
 
 input{
     text-align: center;
     vertical-align: top;
+}
+
+h3{
+    font-family: 'Roboto', sans-serif;
+    margin-right: 31px;
+    margin-top: 0px;
+    font-size: 33px;
+
+}
+
+input{
+    border-radius: 5px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    background: linear-gradient(#dddddd, #8f8f8f, #dddddd);
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    margin-left: 20px;
+    margin-top: 10px;
+    height: 47px;
+    font-size: 22px;
+}
+
+.background{
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    opacity: 0.4;
+    width: 100%;
+    height: 100%;
+    background-image: url("finance.jpeg");
+    height: 815px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container-fluid{
+    margin: 0px;
+    padding: 0px;
+
 }

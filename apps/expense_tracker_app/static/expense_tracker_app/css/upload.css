@@ -1,0 +1,76 @@
+.col-sm-12{
+	height: 103px;
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+.header{
+	height: 100%;
+	width: 100%;
+	background-color: #116d96;
+}
+
+.logo{
+	height: 100%;
+	vertical-align: top;
+}
+
+.logo, .welcome, .logout, .site, h4, h5{
+	display: inline-block;
+	color: white;
+	line-height: 100%;
+}
+.logout{
+	margin-left: 163px;
+}
+
+.site{
+	font-family: 'Black Ops One', cursive;
+	color: white;
+	font-size: 45px;
+	padding-top: 10px;
+}
+
+
+.container-fluid{
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+ul{
+	list-style: none;
+	display: inline-block;
+	margin-left: 75px;
+	padding-bottom: 10px;
+	vertical-align: top;
+	margin-top: 34px;
+}
+h5{
+	font-size: 18px;
+}
+ul li{
+	display: inline;
+	margin-right: 20px;
+}
+a{
+	color: white;
+	opacity: 0.7;
+	text-decoration: none;
+}
+a:visited{
+	text-decoration: none;
+}
+a:hover{
+	color: white;
+	opacity: 2;
+	text-decoration: none;
+}
+
+.table{
+    border: white;
+}
+

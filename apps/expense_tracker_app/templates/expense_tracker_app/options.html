@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Success!</title>
+	{% load static %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="{% static 'expense_tracker_app/css/options.css' %}" media="screen" title="no title"  charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Graduate" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:500,700" rel="stylesheet">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+			$('img.pie').click(function() {
+            window.location.href = '/track/graph';
+        	});
+			$('img.goal').click(function() {
+            window.location.href = '/track/import';
+        	});
+			$('img.upload').click(function() {
+            window.location.href = '/track/import';
+        	});
+			$('img.logo').click(function() {
+            window.location.href = '/track';
+        	});
+        });
+	</script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="col-sm-12">
+			<div class="header">
+				<img class="logo" src="{% static 'expense_tracker_app/images/coach.jpg' %}">
+				<h2 class="site">MONEY COACH</h2>
+				<ul>
+					<li><h5><a href="/track/history">HISTORY</a></h5></li>
+					<li><h5> | </h5></li>
+					<li><h5><a href="#">GOALS</a></h5></li>
+					<li><h5> | </h5></li>
+					<li><h5><a href="#">CATEGORY</a></h5></li>
+				</ul>	
+				<h4><a class="logout" href="/">{{user_name}} | Logout</a></h4>				
+			</div>
+		</div>
+		<div class="col-sm-12">
+            <div class="col-sm-4">
+                <h2 class="subhead">View History</h2>
+                <img class="pie" src="{% static 'expense_tracker_app/images/pie-chart.jpeg' %}" alt="Pie Chart">
+            </div>
+            <div class="col-sm-4">
+                <h2 class="subhead">Make Goals</h2>
+                <img class="goal" src="{% static 'expense_tracker_app/images/goals.jpeg' %}" alt="Goals">
+            </div>
+            <div class="col-sm-4">
+                <h2 class="subhead">Upload Transactions</h2>
+                <img class="upload" src="{% static 'expense_tracker_app/images/upload.jpeg' %}" alt="Goals">
+            </div>
+		</div>
+	
+	</div>
+	
+
+</body>
+</html>
