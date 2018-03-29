@@ -21,7 +21,7 @@ def register(request):
     else:
         for tag, error in response['errors'].iteritems():
             messages.error(request, error, extra_tags="register")
-        return redirect ('/')
+        return redirect ('/log/reg')
 
 def login(request):
     response = User.objects.login_validator(request.POST)
@@ -32,4 +32,4 @@ def login(request):
     else:
         for tag, error in response['errors'].iteritems():
             messages.error(request, error, extra_tags='login')
-        return redirect ('/')
+        return redirect ('/log/reg')

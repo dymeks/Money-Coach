@@ -40,6 +40,9 @@ def home(request):
 	}
 	
 	return render(request,'expense_tracker_app/index.html',context)
+	
+def options(request):
+	return render(request, 'expense_tracker_app/options.html')
 
 def pie_chart(request):
 	categories = []
@@ -201,3 +204,10 @@ def modify(request, t_id):
 	t.price = request.POST['price']
 	t.save()
 	return redirect('/track/display')
+
+def add_manual(request):
+	user = User.objects.get(id=request.session['user_id'])
+	t = Transaction.objects.create(date_of_purchase=request.POST['date'], company=request.POST['company'], category=request.POST['category'], price=request.POST['price'])
+	t.user = user
+	t.save()
+	return redirect('/track/graph')

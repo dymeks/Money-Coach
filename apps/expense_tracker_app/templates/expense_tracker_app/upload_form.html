@@ -1,22 +1,79 @@
 <html>
 <head>
-    <title>{{title}}</title>
+    <title>Upload Form</title>
+    {% load static %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="{% static 'expense_tracker_app/css/upload.css' %}" media="screen" title="no title"  charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Graduate" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:500,700" rel="stylesheet">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+			$('img.logo').click(function() {
+            window.location.href = '/track';
+        	});
+        });
+	</script>
 </head>
 <body>
-    <h1>{{header}}</h1>
-
-    {% if form.errors %}
-        <p style="color: red;">
-            Please correct the error{{ form.errors|pluralize }} below.
-        </p>
-    {% endif %}
-
-    <form action="" enctype="multipart/form-data"  method="post">
-        <table>
-            {{ form.as_table }}
-        </table>
-        {% csrf_token %}
-        <input type="submit" value="Submit">
-    </form>
+    <div class="container-fluid">
+        <div class="col-sm-12">
+            <div class="header">
+                <img class="logo" src="{% static 'expense_tracker_app/images/coach.jpg' %}">
+                <h2 class="site">MONEY COACH</h2>
+                <ul>
+                    <li><h5><a href="/track/history">HISTORY</a></h5></li>
+                    <li><h5> | </h5></li>
+                    <li><h5><a href="#">GOALS</a></h5></li>
+                    <li><h5> | </h5></li>
+                    <li><h5><a href="#">CATEGORY</a></h5></li>
+                </ul>	
+                <h4><a class="logout" href="/">{{user_name}} | Logout</a></h4>				
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h3>Enter a Transaction Manually</h3>
+            <form action="/add/manual" method="POST">
+                {% csrf_token %}
+                <table class="table">
+                    <tr>
+                        <td>Date of Purchase</td>
+                        <td><input type="date" name="date"></td>
+                    </tr>
+                    <tr>
+                        <td>Company</td>
+                        <td><input type="text" name="company" ></td>
+                    </tr>
+                    <tr>
+                        <td>Category</td>
+                        <td><input type="text" name="category"></td>
+                    </tr>
+                    <tr>
+                        <td>Price</td>
+                        <td><input type="number" step="0.01" name="price"></td>
+                    </tr>
+                </table>
+                <input type="submit" value="Add Transaction">
+            </form>
+        </div>
+        <div class="col-sm-6">
+            <h3>Or Upload Transactions</h3>
+            {% if form.errors %}
+                <p style="color: red;">
+                    Please correct the error{{ form.errors|pluralize }} below.
+                </p>
+            {% endif %}
+            <form action="" enctype="multipart/form-data"  method="post">
+                <table class="table">
+                    {{ form.as_table }}
+                </table>
+                {% csrf_token %}
+                <input type="submit" value="Submit">
+            </form>            
+        </div>
+    </div>
 </body>
 </html>

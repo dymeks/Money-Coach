@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="{% static 'expense_tracker_app/css/style.css' %}" media="screen" title="no title"  charset="utf-8">
 	<link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Graduate" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:500,700" rel="stylesheet">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="container-fluid">
@@ -30,18 +31,11 @@
 		<div class="col-sm-12">
 			<div class="main" style="opacity:1.0;" >		
 				<div class="main_content" style="opacity:0.4;"></div>
-				<h1>We're here to help you train for a better finanacial future</h1>	
-				<a class="import" href="/track/import">Import Your Transaction History Here!</a>	
+				<h1>We're here to help you train for a better finanacial future</h1>
+				<h2 class="elipsis"><i class="fas fa-ellipsis-h"></i></h2>
+				<h2><a class="start" href="/track/options">Start Now</a></h2>	
 			</div>
-			<div class="goals">
-				<h2>Your Financial Goals:</h2>
-				<!-- {{goals | safe}} -->
-				<ul>
-					{% for goal in goals %}
-					<a href="/track/graph"><li class="goal">{{goal}}</li></a>		
-					{% endfor %}
-				</ul>	
-			</div>
+
 		</div>
 	
 	</div>
