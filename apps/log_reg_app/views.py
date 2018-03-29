@@ -4,6 +4,9 @@ from django.shortcuts import render, HttpResponse, redirect
 from .models import User
 from django.contrib import messages
 import bcrypt
+def land(request):
+    request.session.flush()
+    return render(request, "log_reg_app/landing-page.html")
 
 def index(request):
     request.session.flush()

@@ -1,0 +1,27 @@
+img{
+    display: inline-block;
+    height: 66px;
+    vertical-align: top;
+    margin-top: 10px;
+}
+
+h1{
+    display: inline-block;
+    font-size: 51px;
+    text-align: center;
+    font-family: 'Black Ops One', cursive;
+}
+
+.col-sm-12{
+    text-align: center;
+    margin-top: 240px;
+}
+.col-sm-8{
+    text-align: center;
+    margin-left: 148px;
+}
+
+input{
+    text-align: center;
+    vertical-align: top;
+}
