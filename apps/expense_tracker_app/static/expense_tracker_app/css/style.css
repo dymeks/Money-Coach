@@ -127,13 +127,15 @@ h1{
 	margin-right: 100px;
 	margin-left: 100px;
 	font-family: 'Roboto', sans-serif;
+	padding-right: 103px;
+	padding-left: 103px;
 
 }
 
 .elipsis{
 	position: absolute;
     margin-top: -304px;
-    margin-left: 640px;
+    margin-left: 680px;
 	font-size: 91px;
 	color: black;
 }
@@ -142,7 +144,7 @@ h1{
     color: black;
     position: absolute;
     margin-top: -232px;
-    margin-left: 616px;
+    margin-left: 656px;
     opacity: 1;
     font-size: 32px;
     font-weight: 700;
