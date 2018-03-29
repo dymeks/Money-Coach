@@ -34,14 +34,13 @@
 	vertical-align: top;
 }
 
-.logo, .welcome, .logout, .site, h4, h5,.settings_menu{
+.logo, .welcome, .logout, .site, h4, h5{
 	display: inline-block;
 	color: white;
 	line-height: 100%;
 }
 .logout{
 	margin-left: 163px;
-	margin-right:10px;
 }
 
 .site{
@@ -117,24 +116,4 @@ h1{
 	margin-left: 100px;
 	font-family: 'Roboto', sans-serif;
 
-}
-
-.graph_button {
-	color:black;
-}
-
-.menu_link {
-	color:black;
-	margin:10px;
-	width:56px;
-	position:relative;
-	z-index: 5;
-}
-
-.settings_menu {
-	vertical-align: top;
-}
-
-.hidden {
-	display: none;
 }

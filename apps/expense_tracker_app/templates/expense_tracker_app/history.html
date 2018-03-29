@@ -6,49 +6,23 @@
 	{% load static %}
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<!-- <script type="text/javascript" src='http://code.jquery.com/jquery-1.10.2.min.js'></script> -->
 	<link rel="stylesheet" href="{% static 'expense_tracker_app/css/style.css' %}" media="screen" title="no title"  charset="utf-8">
-	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
-	<link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Graduate" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Roboto:500,700" rel="stylesheet">
-	<script src="{% static 'expense_tracker_app/javascript/settings_button.js' %}"></script>
-	
 </head>
 <body>
 	<div class="container-fluid">
-		<div class="col-sm-12">
-			<div class="header">
-				<img class="logo" src="{% static 'expense_tracker_app/images/coach.jpg' %}">
-				<h2 class="site">MONEY COACH</h2>
-				<ul>
-					<li><h5><a href="/track/history">HISTORY</a></h5></li>
-					<li><h5> | </h5></li>
-					<li><h5><a href="/track/goals">GOALS</a></h5></li>
-					<li><h5> | </h5></li>
-					<li><h5><a href="#">CATEGORY</a></h5></li>
-				</ul>	
-				<h4><a class="logout" href="/">{{user_name}} | Logout</a>
-					<div class="settings_menu">
-							<div id = "gear">
-								<i class="fas fa-cog"></i>
-							</div>
-							
-							<a class='menu_link hidden' href='#'><button>Profile</button></a><br>
-							<a class='menu_link hidden' href='/track'><button>Home</button></a> <br>
-							<a class='menu_link hidden' href='/'><button>Logout</button></a>				
-							
-					</div>
-				</h4>				
-			</div>
-		</div>
 		<div>
 			<h2>Your Financial History:</h2>
 			{{request.session.graph | safe}}
 		</div>
-		<a href="/track/pie_chart"><button class="graph_button">Show me a pie chart!</button></a>
-		<a href="/track/history"><button class="graph_button">Show me my spending over time</button></a>
+		<a href="/track/pie_chart"><button>Show me a pie chart!</button></a>
+		<a href="/track/history"><button>Show me my spending over time</button></a>
 	</div>
 	
 </body>

@@ -61,9 +61,9 @@ def pie_chart(request):
 	labels = categories
 	values = prices
 	trace = go.Pie(labels=labels, values=values)
-	# py.plot([trace], filename='basic_pie_chart',auto_open=False)
-	# pie_chart = tls.get_embed('https://plot.ly/~dymeks/0')
-	# request.session['graph'] = pie_chart
+	py.plot([trace], filename='basic_pie_chart',auto_open=False)
+	pie_chart = tls.get_embed('https://plot.ly/~dymeks/0')
+	request.session['graph'] = pie_chart
 	return redirect('/track/graph')
 
 def history(request):
@@ -109,48 +109,42 @@ def history(request):
 	)
 
 	fig = dict(data=data,layout=layout)
-	# py.plot(fig, filename='history_chart',auto_open=False,link=False)
+	py.plot(fig, filename='history_chart',auto_open=False,link=False)
 	
 	# context = {
 	# 	'graph': tls.get_embed('https://plot.ly/~dymeks/29')
 	# }
-	# request.session['graph'] = tls.get_embed('https://plot.ly/~dymeks/29')
+	request.session['graph'] = tls.get_embed('https://plot.ly/~dymeks/29')
 	return redirect('/track/graph')
 
 def graph(request):
 	return render(request,'expense_tracker_app/history.html')
 	
-def display_goals(request):
-	df = pd.read_csv("media/documents/goals/susan/susan_goals.csv")
-	print "The entire csv file: "+ str(df)
-	
-	# print "GOAL" +  str(goal)
-	trace1 = go.Bar(
-		x=df['goal'],
-		y=df['current_amount'],
-		name='amount I have saved'
-	)
 
-	trace2 = go.Bar(
-		x=df.goal,
-		y=df.total_amount,
-		name='Amount I have left to save'
-	)
+	# print "The entire csv file: "+ str(df)
+	# for goal in df:
+	# 	print goal
+		# trace1 = go.Bar(
+		# 	x=goal.goal,
+		# 	y=df.current_amount,
+		# 	name='amount I have saved'
+		# )
 
-	data = [trace1, trace2]
-	layout = go.Layout(
-	    barmode='stack'
-	)
+		# trace2 = go.Bar(
+		# 	x=df.goal,
+		# 	y=df.total_amount,
+		# 	name='Amount I have left to save'
+		# )
 
-	fig = go.Figure(data=data, layout=layout)
-	py.plot(fig, filename='goals',auto_open=False,link=False)
- 
-	context = {
-		# 'goals': tls.get_embed('https://plot.ly/~dymeks/31')
-	}
+	# data = [trace1, trace2]
+	# layout = go.Layout(
+	#     barmode='stack'
+	# )
 
-	return render(request,'expense_tracker_app/goals.html',context)
+	# fig = go.Figure(data=data, layout=layout)
+	# py.plot(fig, filename='goals',auto_open=False,link=False)
 
+	# tls.get_embed('https://plot.ly/~dymeks/31')
 def import_sheet(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST,
