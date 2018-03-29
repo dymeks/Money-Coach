@@ -16,7 +16,7 @@ import xlrd
 import pandas as pd
 from pandas import ExcelFile
 from pandas import ExcelWriter
-
+from django.db.models import Sum
 from django import forms
 import django_excel as excel
 from .models import Transaction, Document
@@ -38,22 +38,50 @@ def home(request):
 		'goals':df['goal'],
 
 	}
+	
 	return render(request,'expense_tracker_app/index.html',context)
-def pie_chart(request):
 
-	labels = ['Rent','Food','Entertainment','Car']
-	values = [135.90,25.6,100.30,200.74]
+def pie_chart(request):
+	categories = []
+	prices = []
+	user = User.objects.get(id=request.session['user_id'])
+	user_history = Transaction.objects.filter(user=user)
+
+	for transaction in user_history:
+		if transaction.category not in categories:
+			categories.append(transaction.category)
+
+	for category in categories:
+		print "Category: " + str(category)
+		sum_category = Transaction.objects.filter(category=category).aggregate(Sum('price'))
+		prices.append(sum_category['price__sum'])
+
+	print prices
+	print categories
+	labels = categories
+	values = prices
 	trace = go.Pie(labels=labels, values=values)
 	py.plot([trace], filename='basic_pie_chart',auto_open=False)
 	pie_chart = tls.get_embed('https://plot.ly/~dymeks/0')
+	request.session['graph'] = pie_chart
+	return redirect('/track/graph')
 
-	return render(request,'expense_tracker_app/history.html',{'graph':pie_chart})
 def history(request):
-	df = pd.read_csv("media/documents/2018/03/sample_transaction2.csv")
-	
+	# df = pd.read_csv("media/documents/2018/03/sample_transaction2.csv")
+	user = User.objects.get(id=request.session['user_id'])
+	user_history = Transaction.objects.filter(user=user)
+	print user_history
+	prices = []
+	dates = []
+	for transaction in user_history:
+		prices.append(transaction.price)
+		dates.append(transaction.date_of_purchase)
+
+	print prices
+	print dates
 	trace_high = go.Scatter(
-		x=df.date,
-		y=df['price'],
+		x=dates,
+		y=prices,
 		name = "Price",
 		line = dict(color = '#17BECF'),
 		opacity = 0.8)
@@ -83,17 +111,19 @@ def history(request):
 	fig = dict(data=data,layout=layout)
 	py.plot(fig, filename='history_chart',auto_open=False,link=False)
 	
-	context = {
-		'graph': tls.get_embed('https://plot.ly/~dymeks/29')
-	}
-
-	return render(request,'expense_tracker_app/history.html',context)
+	# context = {
+	# 	'graph': tls.get_embed('https://plot.ly/~dymeks/29')
+	# }
+	request.session['graph'] = tls.get_embed('https://plot.ly/~dymeks/29')
+	return redirect('/track/graph')
 
 def graph(request):
-	df = pd.read_csv("media/documents/goals/susan/susan_goals.csv")
-	print "The entire csv file: "+ str(df)
-	for goal in df:
-		print goal
+	return render(request,'expense_tracker_app/history.html')
+	
+
+	# print "The entire csv file: "+ str(df)
+	# for goal in df:
+	# 	print goal
 		# trace1 = go.Bar(
 		# 	x=goal.goal,
 		# 	y=df.current_amount,
