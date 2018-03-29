@@ -82,9 +82,14 @@ a:hover{
 }
 
 .col-sm-4{
-    text-align: center;
+	text-align: center;
+	margin-top: 100px;
+	padding-left: 0px;
 }
 
 .subhead{
-    font-family: 'Roboto', sans-serif;
+	font-family: 'Roboto', sans-serif;
+	font-size: 38px;
+    font-weight: bold;
+    color: #635f5f;
 }

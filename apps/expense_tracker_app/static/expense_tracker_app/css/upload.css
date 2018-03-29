@@ -71,6 +71,25 @@ a:hover{
 }
 
 .table{
-    border: white;
+	border: white;
+	font-size: 21px;
+}
+.col-sm-6{
+	padding: 70px;
 }
 
+.left{
+	text-align: right;
+}
+
+.right{
+	text-align: left;
+}
+
+h3{
+	font-family: 'Roboto', sans-serif;
+	font-size: 35px;
+    font-weight: bold;
+	color: #635f5f;
+	margin-bottom: 20px;
+}
