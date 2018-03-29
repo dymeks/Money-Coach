@@ -14,3 +14,83 @@
 	 opacity: 0.5;
 	/*background-size:contain;*/
 /*}*/
+
+.col-sm-12{
+	height: 100px;
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+.header{
+	height: 100%;
+	width: 100%;
+	background-color: #116d96;
+}
+
+.logo{
+	height: 100%;
+}
+
+.logo, .welcome, .logout, .site, h4, h5{
+	display: inline-block;
+	color: white;
+	line-height: 100%;
+}
+.logout{
+	margin-left: 163px;
+}
+
+.site{
+	font-family: 'Black Ops One', cursive;
+	color: white;
+	font-size: 36px;
+	line-height: 100%;
+}
+
+
+.container-fluid{
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+ul{
+	list-style: none;
+	display: inline-block;
+	margin-left: 75px;
+}
+h5{
+	font-size: 18px;
+}
+ul li{
+	display: inline;
+	margin-right: 20px;
+}
+a{
+	color: white;
+	opacity: 0.7;
+	text-decoration: none;
+}
+a:visited{
+	text-decoration: none;
+}
+a:hover{
+	color: white;
+	opacity: 2;
+	text-decoration: none;
+}
+
+.import{
+	color: black;
+}
+
+.main_content{
+	width: 100%;
+	height: 700px;
+	background: url(chart.jpg);
+	background-size: contain;
+	background-repeat: no-repeat;
+}

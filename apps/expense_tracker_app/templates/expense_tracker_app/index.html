@@ -4,50 +4,45 @@
 	<meta charset="utf-8">
 	<title>Success!</title>
 	{% load static %}
-	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!-- <script type="text/javascript" src='http://code.jquery.com/jquery-1.10.2.min.js'></script> -->
 	<link rel="stylesheet" href="{% static 'expense_tracker_app/css/style.css' %}" media="screen" title="no title"  charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Graduate" rel="stylesheet">
 </head>
 <body>
-	<div class="container-fluid background">
-		<a href="/track/import">Import Your Transaction History Here!</a>
-		<div class="header">
-			<h1>Welcome, {{user_name}}</h1>
-			<a href="/logout">Logout</a>
-
-			<div>
-				{{response}}
+	<div class="container-fluid">
+		<div class="col-sm-12">
+			<div class="header">
+				<img class="logo" src="{% static 'expense_tracker_app/images/coach.jpg' %}">
+				<h2 class="site">MONEY COACH</h2>
+				<ul>
+					<li><h5><a href="/track/history">HISTORY</a></h5></li>
+					<li><h5> | </h5></li>
+					<li><h5><a href="#">GOALS</a></h5></li>
+					<li><h5> | </h5></li>
+					<li><h5><a href="#">CATEGORY</a></h5></li>
+				</ul>	
+				<h4><a class="logout" href="/logout">{{user_name}} | Logout</a></h4>				
 			</div>
-			<img src="{% static 'expense_tracker_app/images/coach.jpg' %}">
 		</div>
-		<div class="left_navigation">
-			<a href="#">Profile</a>
-			<a href="/track/history">Financial History</a>
-			<a href="#">Financial Goals</a>
-			
+		<div class="col-sm-12">
+			<div class="main_content">
+				<a class="import" href="/track/import">Import Your Transaction History Here!</a>				
+				<h2>By default financial history graph will go here?</h2>
+			</div>
+			<div class="goals">
+				<h2>Your Financial Goals:</h2>
+				<!-- {{goals | safe}} -->
+				<ul>
+					{% for goal in goals %}
+					<a href="/track/graph"><li class="goal">{{goal}}</li></a>		
+					{% endfor %}
+				</ul>	
+			</div>
 		</div>
-		
-		
-		<div class="goals">
-			<h2>Your Financial Goals:</h2>
-			<!-- {{goals | safe}} -->
-			<ul>
-				{% for goal in goals %}
-				<a href="/track/graph"><li class="goal">{{goal}}</li></a>
-					
-						
-				
-				{% endfor %}
-			</ul>
-				
-		</div>
+	
+	</div>
 	
 
 </body>
