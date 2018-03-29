@@ -34,7 +34,7 @@
 	vertical-align: top;
 }
 
-.logo, .welcome, .logout, .site, h4, h5{
+.logo, .welcome, .logout, .site, h4, h5,.settings_menu{
 	display: inline-block;
 	color: white;
 	line-height: 100%;
@@ -103,6 +103,18 @@ a:hover{
 .main{
 	opacity: 1;
 	color: black;
+}
+
+.menu_link {
+
+}
+
+.hidden {
+	display: none;
+}
+
+.graph_button {
+	color:black;
 }
 h1{
 	font-size: 56px;

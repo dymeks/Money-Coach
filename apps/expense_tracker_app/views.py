@@ -123,31 +123,35 @@ def history(request):
 def graph(request):
 	return render(request,'expense_tracker_app/history.html')
 	
+def display_goals(request):
+	df = pd.read_csv("media/documents/goals/susan/susan_goals.csv")
+	print "The entire csv file: "+ str(df)
+	
+	trace1 = go.Bar(
+		x=df['goal'],
+		y=df.current_amount,
+		name='amount I have saved'
+	)
 
-	# print "The entire csv file: "+ str(df)
-	# for goal in df:
-	# 	print goal
-		# trace1 = go.Bar(
-		# 	x=goal.goal,
-		# 	y=df.current_amount,
-		# 	name='amount I have saved'
-		# )
+	trace2 = go.Bar(
+		x=df.goal,
+		y=df.total_amount,
+		name='Amount I have left to save'
+	)
 
-		# trace2 = go.Bar(
-		# 	x=df.goal,
-		# 	y=df.total_amount,
-		# 	name='Amount I have left to save'
-		# )
+	data = [trace1, trace2]
+	layout = go.Layout(
+	    barmode='stack'
+	)
 
-	# data = [trace1, trace2]
-	# layout = go.Layout(
-	#     barmode='stack'
-	# )
+	fig = go.Figure(data=data, layout=layout)
+	py.plot(fig, filename='goals',auto_open=False,link=False)
+	context = {
+		'goals':tls.get_embed('https://plot.ly/~dymeks/31')
+	}
 
-	# fig = go.Figure(data=data, layout=layout)
-	# py.plot(fig, filename='goals',auto_open=False,link=False)
+	return render(request,'expense_tracker_app/goals.html',context)
 
-	# tls.get_embed('https://plot.ly/~dymeks/31')
 def import_sheet(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST,

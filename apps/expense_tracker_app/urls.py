@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^history$', views.history),
     url(r'^pie_chart$', views.pie_chart),
     url(r'^graph$', views.graph),
+    url(r'^goals$', views.display_goals),
     url(r'^edit/(?P<t_id>\d+)$', views.edit),
     url(r'^modify/(?P<t_id>\d+)$', views.modify),
     url(r'^add/manual$', views.add_manual),
