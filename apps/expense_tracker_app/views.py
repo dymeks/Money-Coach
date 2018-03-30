@@ -67,7 +67,7 @@ def pie_chart(request):
 	py.plot([trace], filename='basic_pie_chart',auto_open=False)
 	pie_chart = tls.get_embed('https://plot.ly/~dymeks/0')
 	request.session['graph'] = pie_chart
-	return redirect('/track/graph')
+	return render(request,'expense_tracker_app/history.html',{'user_name':user.first_name})
 
 def history(request):
 	# df = pd.read_csv("media/documents/2018/03/sample_transaction2.csv")
@@ -118,7 +118,7 @@ def history(request):
 	# 	'graph': tls.get_embed('https://plot.ly/~dymeks/29')
 	# }
 	request.session['graph'] = tls.get_embed('https://plot.ly/~dymeks/29')
-	return redirect('/track/graph')
+	return render(request,'expense_tracker_app/history.html',{'user_name':user.first_name})
 
 def graph(request):
 	return render(request,'expense_tracker_app/history.html')
@@ -147,7 +147,8 @@ def display_goals(request):
 	fig = go.Figure(data=data, layout=layout)
 	py.plot(fig, filename='goals',auto_open=False,link=False)
 	context = {
-		'goals':tls.get_embed('https://plot.ly/~dymeks/31')
+		'goals':tls.get_embed('https://plot.ly/~dymeks/31'),
+		'user_name': User.objects.get(id=request.session['user_id']).first_name
 	}
 
 	return render(request,'expense_tracker_app/goals.html',context)

@@ -34,7 +34,7 @@
 	vertical-align: top;
 }
 
-.logo, .welcome, .logout, .site, h4, h5,.settings_menu{
+.logo, .welcome, .logout, .site, h4, h5{
 	display: inline-block;
 	color: white;
 	line-height: 100%;
@@ -105,8 +105,22 @@ a:hover{
 	color: black;
 }
 
-.menu_link {
+.settings_menu {
+	display: inline-block;
+	vertical-align: top;
+}
 
+.menu_link {
+	color:black;
+	position: relative;
+	top:10px;
+	left:0px;
+	z-index: 2;
+
+}
+
+.menu_button {
+	width:70px;
 }
 
 .hidden {
