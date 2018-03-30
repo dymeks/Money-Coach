@@ -19,7 +19,7 @@ from pandas import ExcelWriter
 from django.db.models import Sum
 from django import forms
 import django_excel as excel
-from .models import Transaction, Document
+from .models import Transaction, Document, Goal
 from ..log_reg_app.models import User
 
 class UploadFileForm(forms.Form):
@@ -146,12 +146,14 @@ def display_goals(request):
 
 	fig = go.Figure(data=data, layout=layout)
 	py.plot(fig, filename='goals',auto_open=False,link=False)
+	user = User.objects.get(id=request.session['user_id'])
 	context = {
 		'goals':tls.get_embed('https://plot.ly/~dymeks/31'),
-		'user_name': User.objects.get(id=request.session['user_id']).first_name
+		'user_name': User.objects.get(id=request.session['user_id']).first_name,
+		'goallist' : Goal.objects.filter(user=user),
 	}
 
-	return render(request,'expense_tracker_app/goals.html',context)
+	return render(request,'expense_tracker_app/goals.html', context)
 
 def import_sheet(request):
     if request.method == "POST":
@@ -220,5 +222,21 @@ def add_manual(request):
 def delete(request, t_id):
 	t = Transaction.objects.get(id=t_id)
 	t.delete()
-	t.save()
 	return redirect('/track/display')
+
+def add_goal(request):
+	user = User.objects.get(id=request.session['user_id'])
+	g = Goal.objects.create(title=request.POST['title'], total_amount=request.POST['total'], current_amount=request.POST['saved'], user=user)
+	g.save()
+	return redirect('/track/goals')
+
+def modify_goal(request):
+	g = Goal.objects.get(title=request.POST['title'])
+	g.current_amount = request.POST['saved']
+	g.save()
+	return redirect('/track/goals')
+
+def delete_goal(request, g_id):
+	g = Goal.objects.get(id=g_id)
+	g.delete()
+	return redirect('/track/goals')

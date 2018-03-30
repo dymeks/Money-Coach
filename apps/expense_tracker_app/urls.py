@@ -14,5 +14,7 @@ urlpatterns = [
     url(r'^modify/(?P<t_id>\d+)$', views.modify),
     url(r'^add/manual$', views.add_manual),
     url(r'^delete/(?P<t_id>\d+)$', views.delete),
-
+    url(r'^add/goal$', views.add_goal),
+    url(r'^modify/goal$', views.modify_goal),
+    url(r'^delete/goal/(?P<g_id>\d+)$', views.delete_goal),
 ]
