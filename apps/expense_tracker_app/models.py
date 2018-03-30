@@ -22,3 +22,11 @@ class Transaction(models.Model):
 
     def __str__(self):
         return self.company
+
+class Goal(models.Model):
+    title = models.CharField(max_length=255)
+    total_amount = models.DecimalField(max_digits=19, decimal_places=2)
+    current_amount = models.DecimalField(max_digits=19, decimal_places=2)
+    user = models.ForeignKey(User, related_name="user_goals")
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
