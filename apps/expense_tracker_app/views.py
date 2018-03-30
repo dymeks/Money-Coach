@@ -19,7 +19,7 @@ from pandas import ExcelWriter
 from django.db.models import Sum
 from django import forms
 import django_excel as excel
-from .models import Transaction, Document
+from .models import Transaction, Document,Goal
 from ..log_reg_app.models import User
 
 class UploadFileForm(forms.Form):
@@ -124,18 +124,28 @@ def graph(request):
 	return render(request,'expense_tracker_app/history.html')
 	
 def display_goals(request):
-	df = pd.read_csv("media/documents/goals/susan/susan_goals.csv")
-	print "The entire csv file: "+ str(df)
-	
+	# df = pd.read_csv("media/documents/goals/susan/susan_goals.csv")
+	user = User.objects.get(id=request.session['user_id'])
+	user_goals = Goal.objects.filter(user=user)
+	# print "The entire csv file: "+ str(df)
+	goal_titles = []
+	current_amount = []
+	total_amount = []
+	print "Goals: "+ str(user_goals)
+	for goal in user_goals:
+		goal_titles.append(goal.title)
+		current_amount.append(goal.current_amount)
+		total_amount.append(goal.total_amount)
+
 	trace1 = go.Bar(
-		x=df['goal'],
-		y=df.current_amount,
+		x=goal_titles,
+		y=current_amount,
 		name='amount I have saved'
 	)
 
 	trace2 = go.Bar(
-		x=df.goal,
-		y=df.total_amount,
+		x=goal_titles,
+		y=total_amount,
 		name='Amount I have left to save'
 	)
 
@@ -179,7 +189,8 @@ def import_sheet(request):
         return render(
             request,
             'expense_tracker_app/upload_form.html',
-            {'form': form
+            {'form': form,
+            	'user_name':User.objects.get(id=request.session['user_id']).first_name
 			})
 		
 def display_docs(request):
@@ -196,8 +207,10 @@ def display_docs(request):
 
 def edit(request, t_id):
 	transaction = Transaction.objects.get(id=t_id)
+	user = User.objects.get(id=request.session['user_id'])
 	context = {
 		'transaction': transaction,
+		'user_name':user.name
 	}
 	return render(request, 'expense_tracker_app/edit.html', context)
 

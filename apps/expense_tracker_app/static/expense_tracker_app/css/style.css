@@ -180,3 +180,7 @@ h1{
 	font-weight: bold;
 	font-size: 40px;
 }
+
+.col-sm-1{
+	height: 100%;
+}
