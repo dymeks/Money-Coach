@@ -9,6 +9,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Graduate" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:500,700" rel="stylesheet">
 	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+    <script src="{% static 'expense_tracker_app/javascript/settings_button.js' %}"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
@@ -27,11 +28,22 @@
                 <ul>
                     <li><h5><a href="/track/history">HISTORY</a></h5></li>
                     <li><h5> | </h5></li>
-                    <li><h5><a href="#">GOALS</a></h5></li>
+                    <li><h5><a href="/track/goals">GOALS</a></h5></li>
                     <li><h5> | </h5></li>
-                    <li><h5><a href="#">CATEGORY</a></h5></li>
+                    <li><h5><a href="/track/import">UPLOAD</a></h5></li>
                 </ul>	
-                <h4><a class="logout" href="/">{{user_name}} | Logout</a></h4>				
+				<h4><a class="logout" href="/">{{user_name}}</a>
+					<div class="settings_menu">
+							<div id = "gear">
+								<i class="fas fa-cog"></i>
+							</div>
+							
+							<a class='menu_link hidden' href='#'><button>Profile</button></a><br>
+							<a class='menu_link hidden' href='/track'><button>Home</button></a> <br>
+							<a class='menu_link hidden' href='/'><button>Logout</button></a>				
+							
+					</div>
+				</h4>			
             </div>
         </div>
         <div class="col-sm-6">

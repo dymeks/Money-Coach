@@ -216,3 +216,9 @@ def add_manual(request):
 	t.user = user
 	t.save()
 	return redirect('/track/graph')
+
+def delete(request, t_id):
+	t = Transaction.objects.get(id=t_id)
+	t.delete()
+	t.save()
+	return redirect('/track/display')

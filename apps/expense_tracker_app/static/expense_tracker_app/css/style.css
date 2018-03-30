@@ -167,3 +167,16 @@ h1{
 .start:hover{
 	color: steelblue;
 }
+
+.graph_button{
+	text-align: center;
+}
+
+.history_subhead{
+	margin-top: 20px;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	color: rgb(44, 44, 44);
+	font-weight: bold;
+	font-size: 40px;
+}
