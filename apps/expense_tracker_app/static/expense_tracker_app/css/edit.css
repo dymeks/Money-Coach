@@ -1,20 +1,3 @@
-.graph {
-	display: inline-block;
-	width:40%;
-}
-
-.goals {
-	display: inline-block;
-	width:40%;
-	vertical-align: top;
-}
-
-/*.background {
-	background-image: url('../images/dollar.jpg');
-	 opacity: 0.5;
-	/*background-size:contain;*/
-/*}*/
-
 .col-sm-12{
 	height: 103px;
 	margin-left: 0px;
@@ -111,58 +94,4 @@ a:hover{
 
 .hidden {
 	display: none;
-}
-
-.graph_button {
-	color:black;
-}
-h1{
-	font-size: 56px;
-    text-align: center;
-	padding-top: 254px;
-	margin-top: 0px;
-	opacity: 1px;
-	position: absolute;
-	margin-top: -670px;
-	margin-right: 100px;
-	margin-left: 100px;
-	font-family: 'Roboto', sans-serif;
-	padding-right: 103px;
-	padding-left: 103px;
-
-}
-
-.elipsis{
-	position: absolute;
-    margin-top: -304px;
-    margin-left: 680px;
-	font-size: 91px;
-	color: black;
-}
-
-.start{
-    color: black;
-    position: absolute;
-    margin-top: -232px;
-    margin-left: 656px;
-    opacity: 1;
-    font-size: 32px;
-    font-weight: 700;
-}
-
-.start:hover{
-	color: steelblue;
-}
-
-.graph_button{
-	text-align: center;
-}
-
-.history_subhead{
-	margin-top: 20px;
-	text-align: center;
-	font-family: 'Roboto', sans-serif;
-	color: rgb(44, 44, 44);
-	font-weight: bold;
-	font-size: 40px;
 }

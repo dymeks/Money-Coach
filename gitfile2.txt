@@ -1,0 +1,10 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/Money-Coach
+ExecStart=/home/ubuntu/Money-Coach/venv/bin/gunicorn --workers 3 --bind unix:/home/ubuntu/Money-Coach/money_coach_project.sock money_coach_project.wsgi:application
+[Install]
+WantedBy=multi-user.target

@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^edit/(?P<t_id>\d+)$', views.edit),
     url(r'^modify/(?P<t_id>\d+)$', views.modify),
     url(r'^add/manual$', views.add_manual),
+    url(r'^delete/(?P<t_id>\d+)$', views.delete),
 
 ]

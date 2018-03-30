@@ -1,0 +1,12 @@
+server {
+  listen 80;
+  server_name 54.245.10.234;
+  location = /favicon.ico { access_log off; log_not_found off; }
+  location /static/ {
+      root /home/ubuntu/Money-Coach;
+  }
+  location / {
+      include proxy_params;
+      proxy_pass http://unix:/home/ubuntu/Money-Coach/money_coach_project.sock;
+  }
+}
