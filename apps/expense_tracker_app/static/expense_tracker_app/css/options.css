@@ -93,3 +93,7 @@ a:hover{
     font-weight: bold;
     color: #635f5f;
 }
+
+.col-sm-1{
+	height: 100%;
+}
