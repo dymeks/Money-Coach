@@ -30,12 +30,12 @@ def home(request):
 
 	response = "THis will display the success page/home page after login/registration is successful"
 	
-	df = pd.read_csv("media/documents/goals/susan/susan_goals.csv")
+	# df = pd.read_csv("media/documents/goals/susan/susan_goals.csv")
 
 	context = {
 		'user_name': User.objects.get(id=request.session['user_id']).first_name,
 		'response':response,
-		'goals':df['goal'],
+		'goals':['goal'],
 
 	}
 	

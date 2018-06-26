@@ -1,5 +1,5 @@
-$(document).ready(function(){
-	$("#gear").click(function(){
-		$(".menu_link").toggleClass('hidden');
-	})
-})
+// $(document).ready(function(){
+// 	$("#gear").hover(function(){
+// 		$(".menu_link").toggleClass('hidden');
+// 	})
+// })
