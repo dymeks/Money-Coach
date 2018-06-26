@@ -29,7 +29,6 @@
 } */
 
 .header{
-	height: 100%;
 	width: 100%;
 	background-color: #116d96;
 }
@@ -77,6 +76,10 @@
 
 .container-fluid{
 	min-width:900px;
+}
+
+.row {
+	margin:0px;
 }
 
 .menu-navigation{

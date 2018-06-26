@@ -2,13 +2,14 @@
 <head>
     <title>Upload Form</title>
     {% load static %}
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="{% static 'expense_tracker_app/css/upload.css' %}" media="screen" title="no title"  charset="utf-8">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+	<link rel="stylesheet" href="{% static 'expense_tracker_app/css/style.css' %}" media="screen" title="no title"  charset="utf-8">
 	<link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Graduate" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:500,700" rel="stylesheet">
-	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <script src="{% static 'expense_tracker_app/javascript/settings_button.js' %}"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -21,78 +22,79 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="col-sm-12">
-            <div class="header">
-                <div class="col-sm-1">
-                    <img class="logo" src="{% static 'expense_tracker_app/images/coach.jpg' %}">
-                </div>
-                <div class="col-sm-5">
-                    <h2 class="site">MONEY COACH</h2>
-                </div>
-                <div class="col-sm-5">
-                    <ul>
-                        <li><h5><a href="/track/history">HISTORY</a></h5></li>
-                        <li><h5> | </h5></li>
-                        <li><h5><a href="/track/goals">GOALS</a></h5></li>
-                        <li><h5> | </h5></li>
-                        <li><h5><a href="/track/import">UPLOAD</a></h5></li>
-                    </ul>
-                </div>
-                <div class="col-sm-1">
-                    <h4><a class="logout" href="/">{{user_name}} | </a>
-                        <div class="settings_menu">
-                            <div id = "gear">
-                                <i class="fas fa-cog"></i>
-                            </div>
-                            <a class='menu_link hidden' href='#'><button class="menu_button">Profile</button></a><br>
-                            <a class='menu_link hidden' href='/track'><button class="menu_button">Home</button></a><br>
-                            <a class='menu_link hidden' href='/'><button class="menu_button">Logout</button></a>
-                        </div>
-                    </h4>
-                </div>    	
-    							
+        <div class="header row">
+			<div class="col vertical-center">
+				<img class="logo" src="{% static 'expense_tracker_app/images/coach.jpg' %}">	
+				<h2 class="site">MONEY COACH</h2>
+			</div>
+			<div class="col vertical-center">	
+				<ul class="menu-navigation">
+					<li class="nav-item"><a href="/track/history">HISTORY</a></li>
+					<li class="nav-item"> | </li>
+					<li class="nav-item"><a href="/track/goals">GOALS</a></li>
+					<li class="nav-item"> | </li>
+					<li class="nav-item"><a href="/track/import">UPLOAD</a></li>
+				</ul>	
+			</div>
+			<div class="col vertical-center" >	
+				<div class="settings">
+					<a class="logout-link" href="#">{{user_name}} </a> |
+					<div class="settings_menu">
+						<div id = "gear">
+							<i class="fas fa-cog"></i>
+						</div>
+						
+						<a class='menu_link hidden' href='#'><button class="menu_button">Profile</button></a><br>
+						<a class='menu_link hidden' href='/track'><button class="menu_button">Home</button></a> <br>
+						<a class='menu_link hidden' href='/'><button class="menu_button">Logout</button></a>
+						
+					</div>	
+				</div>
+			</div>					
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Upload Manually</h3>
+                <form action="/add/manual" method="POST">
+                    {% csrf_token %}
+                    <table class="table">
+                        <tr>
+                            <td class="left">Date of Purchase</td>
+                            <td class="right"><input type="date" name="date"></td>
+                        </tr>
+                        <tr>
+                            <td class="left">Company</td>
+                            <td class="right"><input type="text" name="company" ></td>
+                        </tr>
+                        <tr>
+                            <td class="left">Category</td>
+                            <td class="right"><input type="text" name="category"></td>
+                        </tr>
+                        <tr>
+                            <td class="left">Price</td>
+                            <td class="right"><input type="number" step="0.01" name="price"></td>
+                        </tr>
+                    </table>
+                    <input type="submit" value="Add Transaction">
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <h3>Upload File</h3>
+                {% if form.errors %}
+                    <p style="color: red;">
+                        Please correct the error{{ form.errors|pluralize }} below.
+                    </p>
+                {% endif %}
+                <form action="" enctype="multipart/form-data"  method="post">
+                    <table class="table">
+                        {{ form.as_table }}
+                    </table>
+                    {% csrf_token %}
+                    <input type="submit" value="Submit">
+                </form>            
             </div>
         </div>
-        <div class="col-sm-6">
-            <h3>Upload Manually</h3>
-            <form action="/add/manual" method="POST">
-                {% csrf_token %}
-                <table class="table">
-                    <tr>
-                        <td class="left">Date of Purchase</td>
-                        <td class="right"><input type="date" name="date"></td>
-                    </tr>
-                    <tr>
-                        <td class="left">Company</td>
-                        <td class="right"><input type="text" name="company" ></td>
-                    </tr>
-                    <tr>
-                        <td class="left">Category</td>
-                        <td class="right"><input type="text" name="category"></td>
-                    </tr>
-                    <tr>
-                        <td class="left">Price</td>
-                        <td class="right"><input type="number" step="0.01" name="price"></td>
-                    </tr>
-                </table>
-                <input type="submit" value="Add Transaction">
-            </form>
-        </div>
-        <div class="col-sm-6">
-            <h3>Upload File</h3>
-            {% if form.errors %}
-                <p style="color: red;">
-                    Please correct the error{{ form.errors|pluralize }} below.
-                </p>
-            {% endif %}
-            <form action="" enctype="multipart/form-data"  method="post">
-                <table class="table">
-                    {{ form.as_table }}
-                </table>
-                {% csrf_token %}
-                <input type="submit" value="Submit">
-            </form>            
-        </div>
+            
     </div>
 </body>
 </html>
